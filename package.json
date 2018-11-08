@@ -1,0 +1,29 @@
+{
+  "name": "enotasgw-nodejs",
+  "version": "1.0.0",
+  "description": "API para integração com eNotas (https://enotas.com.br/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiago-pereira/enotasgw-nodejs.git"
+  },
+  "author": "Tiago Pereira <tiagops@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tiago-pereira/enotasgw-nodejs/issues"
+  },
+  "keywords": [
+    "enotasgw",
+    "enotas",
+    "node",
+    "api",
+    "nfe"
+  ],
+  "homepage": "https://github.com/tiago-pereira/enotasgw-nodejs#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
