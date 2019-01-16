@@ -54,5 +54,5 @@ eNotasClient.nfe.listar('ID-EMPRESA', 0, 25) // eNotasClient.nfe.listar(idEmpres
 
 ## Documentação
 
-[Doc nodejs-enotasgw](https://github.com/wellingtonsilverio/nodejs-enotasgw)
-[Doc oficial](https://docs.enotasgw.com.br/docs)
+ - [Doc nodejs-enotasgw](https://htmlpreview.github.io/?https://github.com/wellingtonsilverio/nodejs-enotasgw/blob/master/doc/global.html)
+ - [Doc oficial](https://docs.enotasgw.com.br/docs)
