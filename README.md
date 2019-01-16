@@ -38,11 +38,12 @@ eNotasClient.nfe.listar('ID-EMPRESA', 0, 25) // eNotasClient.nfe.listar(idEmpres
   - [x] downloadXml (Download do XML da Nota Fiscal identificada pelo seu Identificador único)
   - [x] downloadXmlPorIdExterno (Download do XML da Nota Fiscal identificada pelo seu Identificador externo)
 
-- EMPRESA - (2/4) 50%
-  - [x] consultar (Consulta uma Empresa pelo Identificador Único)
-  - [x] inserirAtualizar (Insere ou atualiza uma empresa)
-  - [ ] atualizarLogo (Atualiza a logo da empresa)
-  - [ ] atualizarCertificado (Atualiza o certificado digital da empresa)
+- EMPRESA - (5/5) 100%
+  - [x] listar (Recupera uma lista de empresas por um critério de pesquisa)
+  - [x] salvar (Insere ou atualiza uma empresa (CNPJ Emissor))
+  - [x] atualizarCertificado (Vincula um certificado digital a empresa)
+  - [x] logo (Vincula um logotipo a empresa)
+  - [x] consultar (Recupera informações de uma Empresa (CNPJ Emissor))
 
 - PREFEITURA - (1/1) 100%
   - [x] consultar (Consulta as características de uma determinada prefeitura)

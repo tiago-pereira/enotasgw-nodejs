@@ -18,13 +18,11 @@ module.exports = class ServicosMunicipais {
 	 * @return {mixed} retorna uma lista contendo os registros encontrados na pesquisa
 	 */
   consultar(uf, cidade, pageNumber, pageSize, termoPesquisa) {
-    termoPesquisa = termoPesquisa && `contains(descricao, '${termoPesquisa}')`;
-
     return this.client.get(`${PREFIX}/${uf}/cidades/${cidade}/servicos`, {
       params: {
         pageNumber,
         pageSize,
-        filter: termoPesquisa
+        filter: termoPesquisa != null? `contains(descricao, '${termoPesquisa}')`: termoPesquisa
       }
     });
   }

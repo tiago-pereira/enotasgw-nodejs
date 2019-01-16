@@ -14,9 +14,9 @@ module.exports = class NFE {
    * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja emitir.
    * @param {integer} pageNumber Número da página, sendo 0 o número da primeira página.
    * @param {integer} pageSize Total de itens a serem retornados por página.
-   * @param {string} filter (default: status Autorizada) Identificador Filtro para realização da pesquisa. Exemplo de filtro: status eq 'Autorizada'.
-   * @param {string} sortBy (opcional) Campo no qual será aplicado a ordenação.
-   * @param {string} sortDirection (opcional) Direção na qual será feita a ordenação.
+   * @param {string} filtro (default: status Autorizada) Identificador Filtro para realização da pesquisa. Exemplo de filtro: status eq 'Autorizada'.
+   * @param {string} ordernarPor (opcional) Campo no qual será aplicado a ordenação.
+   * @param {string} direcao (opcional) Direção na qual será feita a ordenação.
    * @return {mixed} Retorna uma lista de Notas Fiscais encontradas pelo critério de pesquisa e paginação definidos.
    */
   listar(idEmpresa, numeroPagina, tamanhoPagina, filtro = "status eq 'Autorizada'", ordernarPor = null, direcao = null) {
