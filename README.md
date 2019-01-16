@@ -6,7 +6,7 @@ Client JavaScript para integração com API do [eNotas Gateway](https://enotasgw
 
 ## Utilização
 
-	$ npm i wellingtonsilverio/nodejs-enotasgw
+	$ npm i nodejs-enotasgw
 
 ```javascript
 const eNotas = require("nodejs-enotasgw");

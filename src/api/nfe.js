@@ -45,6 +45,7 @@ module.exports = class NFE {
     console.log(dataInicial, dataFinal);
     
     const filtro = `dataCriacao ge '${dataInicial}' and dataCriacao le '${dataFinal}'`;
+    console.log(filtro);
 
     return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&pageSize=${tamanhoPagina}&filter=${filtro}`);
   }
