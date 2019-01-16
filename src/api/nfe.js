@@ -40,8 +40,8 @@ module.exports = class NFE {
    * @return {mixed} retorna uma lista contendo os registros encontrados na pesquisa
    */
   consultarPorPeriodo(idEmpresa, numeroPagina, tamanhoPagina, dataInicial, dataFinal) {
-    dataInicial = moment(dataInicial).format('Y-m-d H:i:s');
-    dataFinal = moment(dataFinal).format('Y-m-d H:i:s');
+    dataInicial = moment(dataInicial).format('YYYY-MM-DD HH:mm:ss');
+    dataFinal = moment(dataFinal).format('YYYY-MM-DD HH:mm:ss');
     console.log(dataInicial, dataFinal);
     
     const filtro = `dataCriacao ge '${dataInicial}' and dataCriacao le '${dataFinal}'`;
