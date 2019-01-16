@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: nfe.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: nfe.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var moment = require('moment');
+
+const PREFIX = "/empresas";
+
+/** Classe da NFE de Empresa. */
+module.exports = class NFE {
+  
+  constructor(httpClient) {
+    this.client = httpClient;
+  }
+
+  /**
+   * Recupera uma lista de Notas Fiscais por um critério de pesquisa
+   * 
+   * @method GET
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja emitir.
+   * @param {integer} pageNumber Número da página, sendo 0 o número da primeira página.
+   * @param {integer} pageSize Total de itens a serem retornados por página.
+   * @param {string} filtro (default: status Autorizada) Identificador Filtro para realização da pesquisa. Exemplo de filtro: status eq 'Autorizada'.
+   * @param {string} ordernarPor (opcional) Campo no qual será aplicado a ordenação.
+   * @param {string} direcao (opcional) Direção na qual será feita a ordenação.
+   * @return {mixed} Retorna uma lista de Notas Fiscais encontradas pelo critério de pesquisa e paginação definidos.
+   */
+  listar(idEmpresa, numeroPagina, tamanhoPagina, filtro = "status eq 'Autorizada'", ordernarPor = null, direcao = null) {
+    if(ordernarPor == null || direcao == null)
+      return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&amp;pageSize=${tamanhoPagina}&amp;filter=${filtro}`);
+    else
+      return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&amp;pageSize=${tamanhoPagina}&amp;filter=${filtro}&amp;sortBy=${ordernarPor}&amp;sortDirection=${direcao}`);
+  }
+  
+  /**
+   * Consulta notas fiscais emitidas em um determinado período
+   * 
+   * @method GET
+   * @param {string} idEmpresa id da empresa para a qual a nota será emitida
+   * @param {int} pageNumber numero da página no qual a pesquisa será feita
+   * @param {int} pageSize quantidade de registros por página
+   * @param {string} dataInicial data inicial para pesquisa
+   * @param {string} dataFinal data final para pesquisa
+   * @return {mixed} retorna uma lista contendo os registros encontrados na pesquisa
+   */
+  consultarPorPeriodo(idEmpresa, numeroPagina, tamanhoPagina, dataInicial, dataFinal) {
+    dataInicial = moment(dataInicial).utc().format(); // Exemplo da saída:  2019-01-16T16:53:37Z
+    dataFinal = moment(dataFinal).utc().format();
+    console.log(dataInicial, dataFinal);
+    
+    const filtro = `dataCriacao ge '${dataInicial}' and dataCriacao le '${dataFinal}'`;
+
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&amp;pageSize=${tamanhoPagina}&amp;filter=${filtro}`);
+  }
+
+  /**
+   * Emite uma Nota Fiscal
+   * 
+   * @method POST
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja emitir.
+   * @param {mixed} dadosNFe Dados da Nota Fiscal que deseja emitir.
+   * @return {string} nfeId Será retornado o identificador único da nota fiscal.
+   */
+  emitir(idEmpresa, dadosNFe) {
+    return this.client.post(`${PREFIX}/${idEmpresa}/nfes`, dadosNFe);
+  }
+
+  /**
+   * Cancela uma Nota Fiscal
+   * 
+   * @method DELETE
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja requisitar.
+   * @param {string} nfeId Identificador único da Nota Fiscal que deseja requisitar.
+   */
+   cancelar(idEmpresa, nfeId) {
+    return this.client.delete(`${PREFIX}/${idEmpresa}/nfes/${nfeId}`);
+  }
+
+  /**
+   * Recupera informações da Nota Fiscal pelo seu Identificado único
+   * @method GET
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja requisitar.
+   * @param {string} nfeId Identificador único da Nota Fiscal que deseja requisitar.
+   */
+  consultar(idEmpresa, nfeId) {
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes/${nfeId}`);
+  }
+
+  /**
+   * Cancela uma Nota Fiscal identificada pelo seu ID Externo
+   * 
+   * @method DELETE
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja requisitar.
+   * @param {string} idExterno Identificador único da Nota Fiscal que deseja requisitar.
+   */
+  cancelarPorIdExterno(idEmpresa, idExterno) {
+    return this.client.delete(`${PREFIX}/${idEmpresa}/nfes/porIdExterno/${idExterno}`);
+  }
+
+  /**
+   * Recupera informações da Nota Fiscal pelo seu Identificador externo
+   * 
+   * @method GET
+   * @param {string} empresaId id da empresa para a qual a nota será emitida
+   * @param {string} idExterno id da empresa para a qual a nota será emitida
+   * @return {mixed} O retorno inclui os dados da Nota Fiscal requisitada.
+   */
+  consultarPorIdExterno(idEmpresa, idExterno) {
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes/porIdExterno/${idExterno}`);
+  }
+
+  /**
+   * Download do PDF de impressão da Nota Fiscal identificada pelo seu Identificador único
+   * 
+   * @method GET
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja inserir.
+   * @param {string} nfeId Identificador único da Nota Fiscal que deseja requisitar.
+   * @return {bytes} O retorno inclui os bytes do PDF da Nota Fiscal requisitada.
+   */
+  downloadPdf(idEmpresa, nfeId) {
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes/${nfeId}/pdf`);
+  }
+
+  /**
+   * Download do PDF de impressão da Nota Fiscal identificada pelo seu identificador externo
+   * 
+   * @method GET
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja inserir.
+   * @param {string} nfeId Identificador único da Nota Fiscal que deseja requisitar.
+   * @return {bytes} O retorno inclui os bytes do PDF da Nota Fiscal requisitada.
+   */
+  downloadPdfPorIdExterno(idEmpresa, idExterno){
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes/porIdExterno/${idExterno}/pdf`);
+  }
+
+  /**
+   * Download do XML da Nota Fiscal identificada pelo seu Identificador único
+   * 
+   * @method GET
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja requisitar.
+   * @param {string} nfeId Identificador único da Nota Fiscal que deseja requisitar.
+   * @return {string} retorno inclui uma string com o conteúdo XML da Nota Fiscal requisitada.
+   */
+  downloadXml(idEmpresa, nfeId){
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes/${nfeId}/xml`);
+  }
+
+  /**
+   * Download do XML da Nota Fiscal identificada pelo seu Identificador externo
+   * 
+   * @method GET
+   * @param {string} empresaId Identificador único da Empresa relacionada a Nota Fiscal que deseja inserir.
+   * @param {string} nfeId Identificador único da Nota Fiscal que deseja requisitar.
+   * @return {string} retorno inclui uma string com o conteúdo XML da Nota Fiscal requisitada.
+   */
+  downloadXmlPorIdExterno(idEmpresa, idExterno){
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes/porIdExterno/${idExterno}/xml`);
+  }
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DELETE">DELETE</a></li><li><a href="global.html#GET">GET</a></li><li><a href="global.html#POST">POST</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jan 16 2019 16:47:48 GMT-0200 (-02)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
