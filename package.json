@@ -1,0 +1,33 @@
+{
+  "name": "nodejs-enotasgw",
+  "version": "1.0.0",
+  "description": "API para integração com eNotas Gateway (https://enotasgw.com.br)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellingtonsilverio/nodejs-enotasgw.git"
+  },
+  "author": "Wellington Silverio <wellington.alves.silverio@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wellingtonsilverio/nodejs-enotasgw/issues"
+  },
+  "keywords": [
+    "enotasgw",
+    "enotas",
+    "node",
+    "nodejs",
+    "api",
+    "nfe"
+  ],
+  "homepage": "https://github.com/wellingtonsilverio/nodejs-enotasgw#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
+  }
+}
