@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 const PREFIX = "/empresas";
 
 /** Classe da NFE de Empresa. */
@@ -35,10 +37,16 @@ module.exports = class NFE {
    * @param {int} pageSize quantidade de registros por página
    * @param {string} dataInicial data inicial para pesquisa
    * @param {string} dataFinal data final para pesquisa
-   * @return {mixed} listaNFe retorna uma lista contendo os registros encontrados na pesquisa
+   * @return {mixed} retorna uma lista contendo os registros encontrados na pesquisa
    */
   consultarPorPeriodo(idEmpresa, numeroPagina, tamanhoPagina, dataInicial, dataFinal) {
-    // TODO 
+    dataInicial = moment(dataInicial).format('Y-m-d H:i:s');
+    dataFinal = moment(dataFinal).format('Y-m-d H:i:s');
+    console.log(dataInicial, dataFinal);
+    
+    const filtro = `dataCriacao ge '${$dataInicial}' and dataCriacao le '${$dataFinal}'`;
+
+    return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&pageSize=${tamanhoPagina}&filter=${filtro}`);
   }
 
   /**

@@ -25,7 +25,8 @@
   ],
   "homepage": "https://github.com/wellingtonsilverio/nodejs-enotasgw#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "moment": "^2.23.0"
   },
   "devDependencies": {
     "jsdoc": "^3.5.5"
