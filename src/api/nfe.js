@@ -40,11 +40,11 @@ module.exports = class NFE {
    * @return {mixed} retorna uma lista contendo os registros encontrados na pesquisa
    */
   consultarPorPeriodo(idEmpresa, numeroPagina, tamanhoPagina, dataInicial, dataFinal) {
-    dataInicial = moment(dataInicial).utc().format(); // 2019-01-16T16:53:37Z
+    dataInicial = moment(dataInicial).utc().format(); // Exemplo da saída:  2019-01-16T16:53:37Z
     dataFinal = moment(dataFinal).utc().format();
     console.log(dataInicial, dataFinal);
     
-    const filtro = `dataCriacao ge '${dataInicial}' and dataCriacao le '${dataFinal}'`;
+    const filtro = `dataCriacao ge ${dataInicial} and dataCriacao le ${dataFinal}`;
 
     return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&pageSize=${tamanhoPagina}&filter=${filtro}`);
   }
