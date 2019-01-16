@@ -44,7 +44,7 @@ module.exports = class NFE {
     dataFinal = moment(dataFinal).format('Y-m-d H:i:s');
     console.log(dataInicial, dataFinal);
     
-    const filtro = `dataCriacao ge '${$dataInicial}' and dataCriacao le '${$dataFinal}'`;
+    const filtro = `dataCriacao ge '${dataInicial}' and dataCriacao le '${dataFinal}'`;
 
     return this.client.get(`${PREFIX}/${idEmpresa}/nfes?pageNumber=${numeroPagina}&pageSize=${tamanhoPagina}&filter=${filtro}`);
   }
