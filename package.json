@@ -11,6 +11,9 @@
     "url": "git+https://github.com/tiago-pereira/enotasgw-nodejs.git"
   },
   "author": "Tiago Pereira <tiagops@protonmail.com>",
+  "contributors": [
+    "Wellington Silverio <wellington.alves.silverio@gmail.com> (https://github.com/wellingtonsilverio)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tiago-pereira/enotasgw-nodejs/issues"
@@ -24,6 +27,10 @@
   ],
   "homepage": "https://github.com/tiago-pereira/enotasgw-nodejs#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "moment": "^2.23.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
   }
 }

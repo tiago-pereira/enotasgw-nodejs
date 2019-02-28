@@ -1,6 +1,7 @@
 const PREFIX = "/estados/cidades";
 
-module.exports = class NFE {
+/** Classe da Prefeitura de Empresa. */
+module.exports = class Prefeitura {
 
   constructor(httpClient) {
     this.client = httpClient;
@@ -9,8 +10,8 @@ module.exports = class NFE {
   /**
    * Consulta as características de uma determinada prefeitura
    * 
-   *@param int codigoIbge código ibge da cidade cuja a prefeitura será consultada
-   *@return mixed contendo as características da prefeitura em questão
+   *@param {int} codigoIbge código ibge da cidade cuja a prefeitura será consultada
+   *@return {mixed} contendo as características da prefeitura em questão
    */
   consultar(codigoIbge) {
     return this.client.get(`${PREFIX}/${codigoIbge}/provedor`, {
