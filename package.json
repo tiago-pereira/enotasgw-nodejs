@@ -1,6 +1,6 @@
 {
   "name": "enotasgw-nodejs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "API para integração com eNotas (https://enotas.com.br/)",
   "main": "index.js",
   "scripts": {
