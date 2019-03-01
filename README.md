@@ -24,7 +24,7 @@ eNotasClient.nfe.listar('ID-EMPRESA', 0, 25) // eNotasClient.nfe.listar(idEmpres
 ```
 
 ## Versão
-### 1.0
+### 1.1.0
 - NFE - (10/11) 90%
   - [x] listar (Recupera uma lista de Notas Fiscais por um critério de pesquisa)
   - [ ] consultarPorPeriodo (Consulta notas fiscais emitidas em um determinado período)
